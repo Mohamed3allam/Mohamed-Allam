@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "animate.css/animate.min.css";
 import Navbar from "./components/Navbar/Navbar";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import PageLoader from "./components/PageLoader/PageLoader";
 import WowWrapper from "./WowWrapper";
 import Home from "./pages/home/Home";
@@ -67,76 +67,74 @@ function App() {
     }, [cursorShown]);
 
     return (
-        <Router>
-            <PageLoader>
-                <MouseFollow
-                    cursorShown={cursorShown}
-                    mainColor={mainColor}
-                    lightColor={lightColor}
-                />
-                <WavyDots color1={mainColor} color2={lightColor} />
-                <WowWrapper>
-                    <Navbar lightColor={lightColor} mainColor={mainColor}>
-                        <Settings
-                            mainColor={mainColor}
-                            setLightColor={setLightColor}
-                            setMainColor={setMainColor}
-                            cursorShown={cursorShown}
-                            setCursorShown={setCursorShown}
-                        />
-                        <SwipeableWrapper>
-                            <Routes>
-                                <Route
-                                    index
-                                    element={
-                                        <Home
-                                            mainColor={mainColor}
-                                            lightColor={lightColor}
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/about"
-                                    element={
-                                        <About
-                                            mainColor={mainColor}
-                                            lightColor={lightColor}
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/portfolio"
-                                    element={
-                                        <Portfolio
-                                            mainColor={mainColor}
-                                            lightColor={lightColor}
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="/contact"
-                                    element={
-                                        <Contact
-                                            mainColor={mainColor}
-                                            lightColor={lightColor}
-                                        />
-                                    }
-                                />
-                                <Route
-                                    path="*"
-                                    element={
-                                        <NotFound
-                                            mainColor={mainColor}
-                                            lightColor={lightColor}
-                                        />
-                                    }
-                                />
-                            </Routes>
-                        </SwipeableWrapper>
-                    </Navbar>
-                </WowWrapper>
-            </PageLoader>
-        </Router>
+        <PageLoader>
+            <MouseFollow
+                cursorShown={cursorShown}
+                mainColor={mainColor}
+                lightColor={lightColor}
+            />
+            <WavyDots color1={mainColor} color2={lightColor} />
+            <WowWrapper>
+                <Navbar lightColor={lightColor} mainColor={mainColor}>
+                    <Settings
+                        mainColor={mainColor}
+                        setLightColor={setLightColor}
+                        setMainColor={setMainColor}
+                        cursorShown={cursorShown}
+                        setCursorShown={setCursorShown}
+                    />
+                    <SwipeableWrapper>
+                        <Routes>
+                            <Route
+                                index
+                                element={
+                                    <Home
+                                        mainColor={mainColor}
+                                        lightColor={lightColor}
+                                    />
+                                }
+                            />
+                            <Route
+                                path="/about"
+                                element={
+                                    <About
+                                        mainColor={mainColor}
+                                        lightColor={lightColor}
+                                    />
+                                }
+                            />
+                            <Route
+                                path="/portfolio"
+                                element={
+                                    <Portfolio
+                                        mainColor={mainColor}
+                                        lightColor={lightColor}
+                                    />
+                                }
+                            />
+                            <Route
+                                path="/contact"
+                                element={
+                                    <Contact
+                                        mainColor={mainColor}
+                                        lightColor={lightColor}
+                                    />
+                                }
+                            />
+                            <Route
+                                path="*"
+                                element={
+                                    <NotFound
+                                        mainColor={mainColor}
+                                        lightColor={lightColor}
+                                    />
+                                }
+                            />
+                        </Routes>
+                    </SwipeableWrapper>
+                </Navbar>
+            </WowWrapper>
+        </PageLoader>
     );
 }
 
