@@ -1,0 +1,45 @@
+:root {
+    /* adjust this value to change the amplitude */
+}
+
+
+@font-face {
+    font-family: "Hind Siliguri";
+    src: url("../font/Hind\ Siliguri.ttf") format("truetype");
+}
+@font-face {
+    font-family: "Biryani";
+    src: url("../font/Hind\ Siliguri.ttf") format("truetype");
+}
+:root {
+    --main-color: rgb(0, 0, 0);
+    --secondary-color: rgb(110, 226, 245);
+    --third-color: rgb(100, 85, 240);
+    --text-color: rgb(208, 208, 208);
+}
+* {
+    font-family: "Hind Siliguri", sans-serif;
+    color: var(--text-color);
+    transition: 0.5s all ease-in-out;
+}
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--main-color);
+    height: 100%; /* Ensure full height */
+}
+
+body,
+html {
+    overflow-x: hidden !important;
+}
+.p-text {
+    font-family: "Biryani", sans-serif;
+}
+.anim {
+    width: 100vw;
+    height: 100vh;
+    background-color: black;
+    position: fixed;
+    z-index: -1;
+}
