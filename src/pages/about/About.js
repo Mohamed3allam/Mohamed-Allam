@@ -1,11 +1,13 @@
 import React from 'react'
-import { Container } from 'react-bootstrap'
+import { Button, Container } from 'react-bootstrap'
 import { keyframes, styled } from 'styled-components'
 import images from '../../imgs'
 import Pie from './Progress'
 import { tech } from './techs'
 import { FacebookOutlined, GitHub, LinkedIn, X } from '@mui/icons-material'
 import { Link, useNavigate } from 'react-router-dom'
+import ButtonComponent from '../../components/Button/Button'
+import DownloadCV from './DownloadCV'
 
 
 const rotate = keyframes`
@@ -108,7 +110,6 @@ const StyledLink = styled(Link)`
   text-decoration: none;
 `;
 
-
 const About = ({ mainColor, lightColor }) => {
     const navigate = useNavigate()
     const allFrameworks = []
@@ -159,6 +160,10 @@ const About = ({ mainColor, lightColor }) => {
                     <AboutDesc className='lead'>
                         I’m a passionate Web Developer and a recent graduate from the Faculty of Business, Ain Shams University. With 1-2 years of hands-on experience in Front-end Development using React.js and around a year of Back-end Development with Node.js, I specialize in creating dynamic and responsive web applications.
                     </AboutDesc>
+                    <DownloadCV
+                        mainColor={mainColor}
+                        lightColor={lightColor}
+                    />
                 </AboutDiv>
             </Wrapper>
             <hr style={{ width: '100%' }} />
