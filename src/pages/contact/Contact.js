@@ -21,7 +21,7 @@ const ContactInfo = styled.div`
     `
 const Contact = () => {
     return (
-        <Container className='wow animate__animated animate__fadeIn'>
+        <Container className='wow animate__animated animate__fadeIn h-100'>
             <Title>Get In Touch </Title>
             <Wrapper className='p-5'>
                 <ContactData className='col'>

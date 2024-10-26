@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import styled, { keyframes } from "styled-components";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React, {useState} from "react";
+import styled, {keyframes} from "styled-components";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {
     faArrowPointer,
     faCircleDot,
     faCog,
 } from "@fortawesome/free-solid-svg-icons";
-import { palettes } from "../../utils/Palette/Palette";
+import {palettes} from "../../utils/Palette/Palette";
 
 // Define the keyframes for the rotation animation
 const rotate = keyframes`
@@ -19,9 +19,9 @@ const rotate = keyframes`
 `;
 const SettingsContainer = styled.div`
     position: fixed;
-    top: 30%;
+    top: 40%;
     transform: translate(0, -70%);
-    right: ${({ isOpen }) => (isOpen ? "0" : "-250px")};
+    right: ${({isOpen}) => (isOpen ? "0" : "-250px")};
     width: 250px;
     background-color: #22262b;
     transition: right 0.5s ease-in-out;
@@ -33,18 +33,27 @@ const SettingsHeader = styled.div`
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 60px;
     background-color: #22262b;
     color: white;
-    padding: 0 20px;
+    padding: 1.5rem;
     position: absolute;
-    left: -61px;
+    left: -70px;
     top: 0;
     border-radius: 10px 0px 0 10px;
     cursor: pointer;
+    @media screen and (max-width: 768px) {
+        padding: 1rem;
+        left: -41px;
+    }
 `;
 const SettingsIcon = styled(FontAwesomeIcon)`
     animation: ${rotate} 2s linear infinite; /* Apply the animation */
+    width: 30px;
+    height: 30px;
+    @media screen and (max-width: 768px) {
+        width: 15px;
+        height: 15px;
+    }
 `;
 
 const SettingsContent = styled.div`
@@ -52,14 +61,14 @@ const SettingsContent = styled.div`
 `;
 
 const ColorOption = styled.div`
-    border: ${({ chosenColor, color }) =>
+    border: ${({chosenColor, color}) =>
         color === chosenColor ? "solid white 1px" : "none"};
     width: 25px;
     height: 25px;
-    border-radius: 50%;
+    border-radius: 10px;
     margin: 5px;
     cursor: pointer;
-    background-color: ${({ color }) => color};
+    background-color: ${({color}) => color};
 `;
 
 const SettingsTitle = styled.h4`
@@ -115,18 +124,16 @@ const Settings = ({
                     </div>
                     <SettingsTitle>Cursor Circle</SettingsTitle>
                     <div className="d-flex">
-                        <div onClick={() => setCursorShown('show')}>
+                        <div onClick={() => setCursorShown("show")}>
                             <FontAwesomeIcon
-                                style={{ cursor: "pointer" }}
-                                
+                                style={{cursor: "pointer"}}
                                 width={30}
                                 icon={faCircleDot}
                             />
                         </div>
-                        <div onClick={() => setCursorShown('hide')}>
+                        <div onClick={() => setCursorShown("hide")}>
                             <FontAwesomeIcon
-                                style={{ cursor: "pointer" }}
-                                
+                                style={{cursor: "pointer"}}
                                 width={30}
                                 icon={faArrowPointer}
                             />

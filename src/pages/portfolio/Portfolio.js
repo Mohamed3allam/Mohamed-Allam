@@ -52,7 +52,7 @@ const Portfolio = ({ mainColor, lightColor }) => {
         <section className="container wow animate__animated animate__fadeIn position-relative">
             <Contain>
                 <Wrapper>
-                    <PortfolioSidebar />
+                    {/* <PortfolioSidebar /> */}
                     {Object.values(projects).map((project, index) => (
                         <div>
                             <WrapperHeader id={project.name} style={{ color: lightColor }}>

@@ -5,7 +5,7 @@ import { projects } from "../../pages/portfolio/projects";
 const Sidebar = styled.aside`
     position: fixed;
     right: -4px;
-    top: 35%;
+    top: 50%;
     flex: 1;
     padding: 20px;
     border: solid 0.1px wheat;

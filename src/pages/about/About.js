@@ -98,6 +98,7 @@ const InnerImage = styled.img`
   border-radius: 50%;
   width: 300px;
   background-color: white;
+  border: 3px white solid;
 `;
 
 const StyledLink = styled(Link)`
@@ -152,7 +153,7 @@ const About = ({ mainColor, lightColor }) => {
                             </StyledLink>
                         </IconBlock>
                     </BigCircle>
-                    <InnerImage src={images['personal-pic.png']} alt="" />
+                    <InnerImage src={images['personal-pic.jpg']} alt="" />
                 </div>
                 <AboutDiv className='d-flex flex-column col '>
                     <h5>Hello I'M</h5>

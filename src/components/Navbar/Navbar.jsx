@@ -5,6 +5,7 @@ import { Link, useLocation } from "react-router-dom";
 import { routes } from "../../routes";
 import { styled } from "styled-components";
 import { useEffect, useState } from "react";
+import { isDesktop, isMobile, isTablet } from "../../utils/DeviceDetection/deviceDetection";
 
 const NavLink = styled(Link)`
     text-decoration: none;
@@ -22,13 +23,15 @@ function NavScrollExample({ children, mainColor, lightColor }) {
     useEffect(() => {
         window.scrollTo(0, 0);
     }, [location.pathname]);
+    console.log(isDesktop());
+    console.log(isMobile())
 
     return (
         <>
             <Navbar
-                variant="dark"
-                style={{backgroundColor:'black', overflowY:'hidden', height:'min-content'}}
-                fixed="top"
+            bg={isDesktop() ? "" : "dark"}
+                style={{overflowY:'hidden', height:'min-content'}}
+                fixed={isMobile() ? "bottom" : "top"}
                 expand="lg"
                 className="bg-body-tertiary"
             >
@@ -36,7 +39,7 @@ function NavScrollExample({ children, mainColor, lightColor }) {
                     {/* <Navbar.Toggle aria-controls="navbarScroll" /> */}
                     {/* <Navbar.Collapse id="navbarScroll"> */}
                         <Nav
-                            className="my-2 my-lg-0 gap-5 flex-row w-100 justify-content-center"
+                            className="my-2 my-lg-0 gap-4 flex-row w-100 justify-content-center"
                             navbarScroll
                         >
                             {routes.map((route, index) => (
@@ -55,7 +58,7 @@ function NavScrollExample({ children, mainColor, lightColor }) {
                     {/* </Navbar.Collapse> */}
                 </Container>
             </Navbar>
-            <main style={{ paddingTop: "120px", width:'100%', overflow:'hidden' }}>{children}</main>
+            <main style={{ paddingTop: isMobile() ? "50px" : "120px", width:'100%', overflow:'hidden' }}>{children}</main>
         </>
     );
 }

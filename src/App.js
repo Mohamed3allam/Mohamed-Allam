@@ -15,6 +15,7 @@ import Contact from "./pages/contact/Contact";
 import SwipeableWrapper from "./components/SwipableWrapper/SwipableWrapper";
 import { palettes } from "./utils/Palette/Palette";
 import NotFound from "./pages/404/NotFound";
+import Settings2 from "./components/Settings/Settings2";
 
 // Initialize mainColor from localStorage or default to Blue
 const getInitialPalette = () => {
@@ -76,7 +77,14 @@ function App() {
             <WavyDots color1={mainColor} color2={lightColor} />
             <WowWrapper>
                 <Navbar lightColor={lightColor} mainColor={mainColor}>
-                    <Settings
+                    {/* <Settings
+                        mainColor={mainColor}
+                        setLightColor={setLightColor}
+                        setMainColor={setMainColor}
+                        cursorShown={cursorShown}
+                        setCursorShown={setCursorShown}
+                    /> */}
+                    <Settings2
                         mainColor={mainColor}
                         setLightColor={setLightColor}
                         setMainColor={setMainColor}

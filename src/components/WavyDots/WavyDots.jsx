@@ -3,6 +3,9 @@ import * as THREE from 'three';
 import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Suspense, useMemo, useRef, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
+import Lights from './Lights';
+import { OrbitControls } from '@react-three/drei';
+import { isMobile } from '../../utils/DeviceDetection/deviceDetection';
 
 // Function to create a circle texture
 const createCircleTexture = () => {
@@ -49,9 +52,6 @@ const Points = ({ color1, color2 }) => {
         color1: { value: new THREE.Color(color1) },
         color2: { value: new THREE.Color(color2) },
     });
-
-    const oldColor1 = useRef(new THREE.Color(color1));
-    const oldColor2 = useRef(new THREE.Color(color2));
 
     const targetColor1 = useRef(new THREE.Color(color1));
     const targetColor2 = useRef(new THREE.Color(color2));
@@ -107,7 +107,7 @@ const Points = ({ color1, color2 }) => {
         void main() {
             vPosition = position;
             vec4 mvPosition = modelViewMatrix * vec4(position, 1.0);
-            gl_PointSize = size * (20.0 / -mvPosition.z);
+            gl_PointSize = size * (${isMobile() ? "30" : "20"}.0 / -mvPosition.z);
             gl_Position = projectionMatrix * mvPosition;
         }
     `;
@@ -150,10 +150,11 @@ const Points = ({ color1, color2 }) => {
 
 const AnimationCanvas = ({ color1, color2, targetPosition }) => {
     return (
-        <Canvas camera={{ position: [50, 6, 0], fov: 80 }}>
+        <Canvas style={{backgroundColor:"black"}} camera={{ position: [50, 6, 0], fov: 80 }}>
             <Suspense fallback={null}>
                 <Points color1={color1} color2={color2} />
             </Suspense>
+            <Lights />
             <CameraControls targetPosition={targetPosition} />
         </Canvas>
     );
