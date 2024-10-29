@@ -189,7 +189,7 @@ npm run build
 
 If you have any questions or want to get in touch, you can reach me at:
 
-- Email: mohamed.abdelrahman@example.com
+- Email: mohamedabdelrahman326@yahoo.com
 - LinkedIn: [linkedin.com/in/mohamed-abdelrahman](https://linkedin.com/in/mohamed-abdelrahman)
 
 ## License
