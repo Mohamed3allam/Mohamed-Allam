@@ -19,7 +19,7 @@ const Contain = styled(Container)`
 `
 
 const Wrapper = styled.div`
-    overflow-y: scroll;
+    overflow-y: auto;
     flex: 4;
     scroll-behavior: smooth;
 `
@@ -49,7 +49,7 @@ const ProjectWrapper = styled.div`
 
 const Portfolio = ({ mainColor, lightColor }) => {
     return (
-        <section className="container wow animate__animated animate__fadeIn position-relative">
+        <section className="container wow animate__animated animate__fadeIn position-relative ">
             <Contain>
                 <Wrapper>
                     {/* <PortfolioSidebar /> */}

@@ -4,10 +4,8 @@ import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { Suspense, useMemo, useRef, useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import Lights from './Lights';
-import { OrbitControls } from '@react-three/drei';
 import { isMobile } from '../../utils/DeviceDetection/deviceDetection';
 
-// Function to create a circle texture
 const createCircleTexture = () => {
     const size = 128;
     const canvas = document.createElement('canvas');
@@ -36,7 +34,7 @@ const CameraControls = ({ targetPosition }) => {
     }, [camera.position]);
 
     useFrame(() => {
-        currentPosition.current.lerp(targetPosition, 0.05); // Smoothly interpolate to the target position
+        currentPosition.current.lerp(targetPosition, 0.05);
         camera.position.copy(currentPosition.current);
         camera.lookAt(0, 0, 0);
     });

@@ -122,7 +122,6 @@ const About = ({ mainColor, lightColor }) => {
     // })
 
 
-    console.log(allFrameworks)
     const technologies = [...tech.languages, ...allFrameworks, tech.wordpress]
     const databases = [...tech.databases]
 
