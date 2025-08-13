@@ -21,7 +21,7 @@ const DownloadCV = ({ mainColor, lightColor }) => {
     const handleDownload = () => {
         const link = document.createElement("a");
         link.href = pdfFile;
-        link.setAttribute("download", "MOHAMED ABDELRAHMAN.pdf"); // set the desired filename
+        link.setAttribute("download", "MOHAMED ABDELRAHMAN.pdf");
         link.click();
     };
 

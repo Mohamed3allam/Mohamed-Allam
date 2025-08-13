@@ -33,8 +33,12 @@ function NavScrollExample({ children, mainColor, lightColor }) {
     return (
         <>
             <Navbar
-                bg={isDesktop() ? "" : "dark"}
-                style={{ overflowY: "hidden", height: "min-content", backdropFilter: "blur(20px)", backgroundColor: "rgba(0, 0, 0, 0.7)" }}
+                style={{
+                    overflowY: "auto",
+                    height: "min-content",
+                    backdropFilter: "blur(20px)",
+                    backgroundColor: "rgba(0, 0, 0, 0.7)",
+                }}
                 fixed={isMobile() ? "top" : "top"}
                 expand="lg"
                 className="bg-body-tertiary"
@@ -64,7 +68,7 @@ function NavScrollExample({ children, mainColor, lightColor }) {
             </Navbar>
             <main
                 style={{
-                    paddingTop: isMobile() ? "50px" : "120px",
+                    paddingTop: "100px",
                     width: "100%",
                     overflow: "hidden",
                 }}
