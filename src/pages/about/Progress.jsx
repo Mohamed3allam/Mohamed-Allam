@@ -34,7 +34,7 @@ const AnimatedCircularProgressbar = ({ percentage, colour, iconUrl }) => {
         <div style={{ position: 'relative', width: '100px', height: '100px' }}>
             <CircularProgressbar
                 value={displayedPercentage}
-                text={`${Math.round(displayedPercentage)}%`}
+                // text={`${Math.round(displayedPercentage)}%`}
                 styles={buildStyles({
                     pathColor: colour,
                     textColor: 'white',
@@ -47,9 +47,9 @@ const AnimatedCircularProgressbar = ({ percentage, colour, iconUrl }) => {
                 alt="icon"
                 style={{
                     position: 'absolute',
-                    top: '-20px',
+                    top: '50%',
                     left: '50%',
-                    transform: 'translateX(-50%)',
+                    transform: 'translate(-50%, -50%)',
                     width: '40px',
                     height: '40px'
                 }}

@@ -91,7 +91,7 @@ function App() {
                         cursorShown={cursorShown}
                         setCursorShown={setCursorShown}
                     />
-                    <SwipeableWrapper>
+                    {/* <SwipeableWrapper> */}
                         <Routes>
                             <Route
                                 index
@@ -139,7 +139,7 @@ function App() {
                                 }
                             />
                         </Routes>
-                    </SwipeableWrapper>
+                    {/* </SwipeableWrapper> */}
                 </Navbar>
             </WowWrapper>
         </PageLoader>
