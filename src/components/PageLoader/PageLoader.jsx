@@ -1,62 +1,65 @@
 import React, { useEffect, useState } from "react";
 import { keyframes, styled } from "styled-components";
-import images from "../../imgs";
-import { Riple } from "react-loading-indicators";
 
-// Define the keyframes for the rotation animation
-const rotate = keyframes`
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+const fadeInStayOut = keyframes`
+  0% { opacity: 0; }
+  40% { opacity: 1; }
+  60% { opacity: 1; }
+  100% { opacity: 0; }
 `;
 
 const Container = styled.div`
-    height: 100vh;
-    width: 100%;
-    position: absolute;
-    z-index: 999999;
-    background-color: var(--main-color);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    transition: opacity 0.5s ease;
-    opacity: ${({ pageLoaded }) => (pageLoaded ? 0 : 1)};
-    pointer-events: ${({ pageLoaded }) => (pageLoaded ? "none" : "auto")};
+  height: 100vh;
+  width: 100%;
+  position: fixed;
+  z-index: 9999;
+  background-color: #000;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 `;
 
-const LogoImage = styled.img`
-    animation: ${rotate} 2s linear infinite; /* Apply the animation */
-    filter: drop-shadow(0px 0px 1rem var(--secondary-color));
+const Message = styled.h1`
+  color: #fff;
+  font-size: clamp(1.5rem, 0.3333rem + 3.3333vw, 3rem);
+  text-align: center;
+  animation: ${fadeInStayOut} 3s forwards; /* 3 seconds for slower fade */
 `;
 
-const PageLoader = ({ children, mainColor }) => {
-    const [pageLoaded, setPageLoaded] = useState(false);
+const PageLoader = ({ children }) => {
+  const [step, setStep] = useState(0);
 
-    useEffect(() => {
-        const handleLoad = () => {
-          setTimeout(()=> {
-            setPageLoaded(true)
-          }, 1000)
-        };
+  useEffect(() => {
+    const timers = [];
 
-        // Use window event listener for 'load' event
-        window.addEventListener("load", handleLoad());
+    // Step 0: HelloMessage
+    timers.push(setTimeout(() => setStep(1), 3000)); // 3s animation
 
-    }, []);
+    // Step 1: WelcomeMessage
+    timers.push(setTimeout(() => setStep(2), 6000)); // 3s after previous
 
-    return (
-        <>
-            <Container pageLoaded={pageLoaded}>
-              <Riple color={mainColor} size="medium" text="" textColor="" />
-            </Container>
-            <div style={{ display: pageLoaded ? "block" : "none" }}>
-                {children}
-            </div>
-        </>
-    );
+    return () => timers.forEach(clearTimeout);
+  }, []);
+
+  return (
+    <>
+      {step < 2 && (
+        <Container>
+          {step === 0 && <Message>Hello, there</Message>}
+          {step === 1 && <Message>Welcome to My Portfolio</Message>}
+        </Container>
+      )}
+      <div
+        style={{
+          opacity: step === 2 ? 1 : 0,
+          transition: "opacity 1s ease",
+          pointerEvents: step === 2 ? "auto" : "none",
+        }}
+      >
+        {children}
+      </div>
+    </>
+  );
 };
 
 export default PageLoader;

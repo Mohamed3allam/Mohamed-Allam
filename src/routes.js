@@ -11,7 +11,7 @@ export const routes = [
         position: [30, 10, 30]
     }, 
     {
-        name:'Portfolio',
+        name:'Projects',
         slug:'/portfolio',
         position: [10, 20, 50]
     },

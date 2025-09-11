@@ -29,6 +29,9 @@ const SettingsButton = styled.button`
     border: none;
     outline: none;
     position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 const ColorBtn = styled.div`
     
