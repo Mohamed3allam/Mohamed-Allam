@@ -67,7 +67,7 @@ export const tech = {
                 {
                     name: "Socket.io",
                     percentage: 50,
-                    icon: images["icons/socketio.svg"],
+                    icon: images["icons/socket.io.svg"],
                 },
             ],
         },
@@ -107,12 +107,12 @@ export const tech = {
         {
             name: "React Hooks",
             percentage: 85,
-            icon: images["icons/hooks.svg"],
+            icon: images["icons/react.svg"],
         },
         {
             name: "Context API",
             percentage: 75,
-            icon: images["icons/context.svg"],
+            icon: images["icons/react.svg"],
         },
         {
             name: "Redux",
@@ -127,7 +127,7 @@ export const tech = {
         {
             name: "React Hook Form",
             percentage: 75,
-            icon: images["icons/rhf.svg"], // add an icon if available
+            icon: images["icons/react.svg"], // add an icon if available
         },
     ],
 
@@ -140,7 +140,7 @@ export const tech = {
         {
             name: "Git/GitHub",
             percentage: 85,
-            icon: images["icons/github.svg"],
+            icon: images["icons/git.svg"],
         },
         {
             name: "AWS (S3, EC2)",
@@ -156,11 +156,6 @@ export const tech = {
             name: "Netlify",
             percentage: 70,
             icon: images["icons/netlify.svg"],
-        },
-        {
-            name: "Render",
-            percentage: 60,
-            icon: images["icons/render.svg"],
         },
         {
             name: "CI/CD",

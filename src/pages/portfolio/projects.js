@@ -81,6 +81,15 @@ export const projects = {
         icon: images["icons/nodejs.svg"],
         projects: [
             {
+                name: "Apartments App",
+                slug: "apartments-app",
+                link: "https://apartment-app-frontend.vercel.app/",
+                github: "https://github.com/Mohamed3allam/apartment-app",
+                description:
+                    "A Responsive Apartment Marketplace with search, filtering, and form handling for adding new listings.	Implemented modular, type- safe components using React Hook Form and Bootstrap for clean UI and usability.	Integrated with a custom Express + TypeScript API(AWS EC2) to fetch and persist listings. Frontend deployed on Vercel, backend deployed on AWS EC2.	Full app containerized with Docker for portability.",
+                imageUrl: images["project-images/apartments-app.jpeg"],
+            },
+            {
                 name: "Premium Website",
                 slug: "premium-node",
                 link: "https://mohamed3allam.github.io/Premium-Club-MERN-App/",
@@ -89,6 +98,7 @@ export const projects = {
                     "Initially built using React, the project now includes an admin panel for user management, data control, and committee management. The backend is powered by Node.js with Express and MongoDB, featuring authentication and authorization using JWT tokens and file storage using Multer and Amazon S3.",
                 imageUrl: images["project-images/premium-node.png"],
             },
+
         ],
     },
     Wordpress: {
