@@ -148,9 +148,7 @@ const About = ({ mainColor, lightColor }) => {
           <h5>Hello I'M</h5>
           <AboutTitle style={{ color: lightColor }}>MOHAMED <br /> ABDELRAHMAN AHMED MOHAMED</AboutTitle>
           <AboutDesc className='lead'>
-            I’m a Frontend Developer specialized in Next.js and React, passionate about crafting scalable, high-performance web apps with clean architecture and great user experience.
-            With strong foundations in Node.js, Express, and databases, I don’t just build interfaces — I deliver end-to-end solutions that are production-ready, from UI to deployment on cloud platforms.
-
+            Full-Stack Developer with a frontend edge (Next.js, React) and solid backend skills (Node.js, Express, MongoDB). Originally from a business background, I shifted careers through relentless self-study and hands-on projects, transforming into a developer who can take a product from concept to deployment. I thrive at building clean, scalable architectures, optimizing performance, and delivering production-ready solutions — whether it’s crafting smooth user experiences, designing robust APIs, or deploying full apps to the cloud.
           </AboutDesc>
           <DownloadCV
             mainColor={mainColor}
