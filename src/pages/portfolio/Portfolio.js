@@ -1,148 +1,326 @@
-import React from "react";
-import { Col, Container } from "react-bootstrap";
-import { styled } from "styled-components";
-import { projects } from "./projects";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import ImageLightbox from "./ImageLightbox";
-import images from "../../imgs";
-import PortfolioSidebar from "../../components/PortfolioSidebar/PortfolioSidebar";
+import { Container, Row, Col, Offcanvas, Button } from "react-bootstrap";
 import LaunchIcon from "@mui/icons-material/Launch";
 import GitHubIcon from "@mui/icons-material/GitHub";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Pagination } from "swiper/modules";
-import "swiper/css";
-import "swiper/css/navigation";
-import "swiper/css/pagination";
 
-const Contain = styled(Container)`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    position: relative;
-    padding: 20px;
-`;
+import {
+    projectTypes,
+    programmingLanguages,
+    technologies,
+    deploymentPlatforms,
+} from "./techs";
+import { projects } from "./projects";
+import ImageLightbox from "./ImageLightbox";
+import {
+    PageWrapper,
+    ProjectCard,
+    TechIcon,
+    Sidebar,
+    ButtonsContainer,
+    ProjectData,
+    TechStackContainer,
+    TechIcons,
+} from "./styles/ProjectsPage.styles";
+import { motion } from "framer-motion";
 
-const Wrapper = styled.div`
-    overflow-y: auto;
-    flex: 4;
-    scroll-behavior: smooth;
-`;
-const WrapperHeader = styled.h3`
-    font-size: clamp(1rem, 0.3333rem + 5.3333vw, 3rem);
-    display: flex;
-    align-items: center;
-    gap: 5px;
-    margin-bottom: 3rem;
-`;
-const WrapperHeader2 = styled.h4`
-    font-size: clamp(0.15rem, 0.3333rem + 3.3333vw, 1.7rem);
-`;
+const ProjectsPage = () => {
+    // Parse filters from URL initially
+    const getFiltersFromUrl = () => {
+        const params = new URLSearchParams(window.location.search);
+        return {
+            type: params.getAll("type").map(Number),
+            lang: params.getAll("lang").map(Number),
+            tech: params.getAll("tech").map(Number),
+            deploy: params.getAll("deploy").map(Number),
+        };
+    };
 
-const TechWrapper = styled.div`
-    display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 2rem;
-`;
-const ProjectWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-`;
+    const [filters, setFilters] = useState(getFiltersFromUrl);
+    const [filteredProjects, setFilteredProjects] = useState(projects.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+    const [showFilters, setShowFilters] = useState(false);
 
-const Portfolio = ({ mainColor, lightColor }) => {
+    // Sync URL with state whenever filters change
+    useEffect(() => {
+        const params = new URLSearchParams();
+        Object.entries(filters).forEach(([key, values]) => {
+            values.forEach((v) => params.append(key, v));
+        });
+        window.history.replaceState({}, "", `?${params.toString()}`);
+    }, [filters]);
+
+    // Filtering logic
+    useEffect(() => {
+        let result = projects;
+
+        if (filters.type.length) {
+            result = result.filter((p) =>
+                p.projectType?.some((id) => filters.type.includes(id))
+            );
+        }
+        if (filters.lang.length) {
+            result = result.filter((p) =>
+                p.programmingLanguages?.some((id) => filters.lang.includes(id))
+            );
+        }
+        if (filters.tech.length) {
+            result = result.filter((p) =>
+                p.technologies?.some((id) => filters.tech.includes(id))
+            );
+        }
+        if (filters.deploy.length) {
+            result = result.filter((p) =>
+                p.deploymentPlatforms?.some((id) => filters.deploy.includes(id))
+            );
+        }
+
+        setFilteredProjects(result.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
+    }, [filters]);
+
+    // Toggle helper
+    const toggleFilter = (key, value) => {
+        setFilters((prev) => {
+            const values = prev[key] || [];
+            if (values.includes(value)) {
+                return { ...prev, [key]: values.filter((v) => v !== value) };
+            } else {
+                return { ...prev, [key]: [...values, value] };
+            }
+        });
+    };
+
+    const resetFilters = () => {
+        setFilters({ type: [], lang: [], tech: [], deploy: [] });
+    };
+
+    // Sidebar UI
+    const SidebarFilters = (
+        <Sidebar>
+            <div className="d-flex justify-content-between align-items-center mb-3">
+                <h3 className="m-0">Filters</h3>
+                <button className="btn btn-danger btn-sm mt-3" onClick={resetFilters}>
+                    Reset Filters
+                </button>
+            </div>
+
+            <h4>Filter by Type</h4>
+            <div className="mb-3">
+                {projectTypes.map((t) => (
+                    <button
+                        key={t.id}
+                        className={`btn btn-sm me-2 mb-2 ${filters.type.includes(t.id) ? "btn-dark" : "btn-outline-dark"
+                            }`}
+                        onClick={() => toggleFilter("type", t.id)}
+                    >
+                        {t.icon && <TechIcon src={t.icon} alt={t.name} />}
+                        {t.name}
+                    </button>
+                ))}
+            </div>
+
+            <h4>Filter by Language</h4>
+            <div className="mb-3">
+                {programmingLanguages.map((lang) => (
+                    <button
+                        key={lang.id}
+                        className={`btn btn-sm me-2 mb-2 ${filters.lang.includes(lang.id) ? "btn-dark" : "btn-outline-dark"
+                            }`}
+                        onClick={() => toggleFilter("lang", lang.id)}
+                    >
+                        <img
+                            src={lang.icon}
+                            alt={lang.name}
+                            style={{ width: 18, marginRight: 6 }}
+                        />
+                        {lang.name}
+                    </button>
+                ))}
+            </div>
+
+            <h4>Filter by Technology</h4>
+            <div className="mb-3">
+                {technologies.map((tech) => (
+                    <button
+                        key={tech.id}
+                        className={`btn btn-sm me-2 mb-2 ${filters.tech.includes(tech.id) ? "btn-dark" : "btn-outline-dark"
+                            }`}
+                        onClick={() => toggleFilter("tech", tech.id)}
+                    >
+                        <TechIcon src={tech.icon} alt={tech.name} style={{ marginRight: 6 }} />
+                        <span>{tech.name}</span>
+                    </button>
+                ))}
+            </div>
+
+            <h4>Filter by Deployment</h4>
+            <div className="mb-3">
+                {deploymentPlatforms.map((dp) => (
+                    <button
+                        key={dp.id}
+                        className={`btn btn-sm me-2 mb-2 ${filters.deploy.includes(dp.id) ? "btn-dark" : "btn-outline-dark"
+                            }`}
+                        onClick={() => toggleFilter("deploy", dp.id)}
+                    >
+                        <img
+                            src={dp.icon}
+                            alt={dp.name}
+                            style={{ width: 18, marginRight: 6 }}
+                        />
+                        {dp.name}
+                    </button>
+                ))}
+            </div>
+        </Sidebar>
+    );
+
     return (
-        <section className="container wow animate__animated animate__fadeIn position-relative ">
-            <Contain>
-                <Wrapper>
-                    {/* <PortfolioSidebar /> */}
-                    {Object.values(projects).map((project, index) => (
-                        <>
-                            <WrapperHeader
-                                id={project.name}
-                                style={{ color: lightColor }}
-                            >
-                                <img src={project.icon} width={30} />{" "}
-                                <span>{project.name}</span>
-                            </WrapperHeader>
-                            <TechWrapper>
-                                <Swiper
-                                    modules={[Navigation, Pagination]}
-                                    spaceBetween={30}
-                                    slidesPerView={1}
-                                    initialSlide={1}
-                                    className="w-100 mb-5"
-                                    navigation
-                                    pagination={{
-                                        clickable: true,
-                                        type: "bullets",
-                                        element: ".swiper-pagination",
-                                    }}
-                                    breakpoints={{
-                                        320: {
-                                            slidesPerView: 1.3,
-                                            centeredSlides: true,
-                                        },
-                                        768: { slidesPerView: 2 },
-                                        1024: { slidesPerView: 3 },
-                                    }}
-                                >
-                                    <div className="swiper-pagination"></div>
-                                    {project.projects.map((app, index) => (
-                                        <SwiperSlide key={index}>
-                                            <ProjectWrapper
-                                                className=" d-flex flex-column justify-content-between h-100"
-                                                id={app.slug}
+        <PageWrapper className="wow animate__animated animate__fadeIn">
+            <Container className="position-relative">
+                <Row>
+                    {/* Desktop Sidebar */}
+                    <Col lg={3} className="d-none d-lg-block">
+                        {SidebarFilters}
+                    </Col>
+
+                    {/* Mobile/Tablet Filter Button */}
+                    <Col xs={12} className="d-lg-none mb-3">
+                        <Button variant="dark" onClick={() => setShowFilters(true)}>
+                            Open Filters
+                        </Button>
+                    </Col>
+
+                    {/* Offcanvas for mobile/tablet */}
+                    <Offcanvas
+                        show={showFilters}
+                        onHide={() => setShowFilters(false)}
+                        backdropClassName="blurred-backdrop bg-transparent"
+                        style={{
+                            backdropFilter: "blur(10px)",
+                            backgroundColor: "rgba(0, 0, 0, 0.0)",
+                        }}
+                    >
+                        <Offcanvas.Header closeButton>
+                            <Offcanvas.Title>Filters</Offcanvas.Title>
+                        </Offcanvas.Header>
+                        <Offcanvas.Body>{SidebarFilters}</Offcanvas.Body>
+                    </Offcanvas>
+
+                    {/* Projects grid */}
+                    <Col lg={9}>
+                        <Row className="gy-4">
+                            {filteredProjects.map((project) => (
+                                <Col lg={6} md={6} key={project.id}>
+                                    <ProjectCard>
+                                        <ProjectData>
+                                            <ImageLightbox
+                                                imageSrc={project.imageUrl}
+                                                imageAlt={project.name}
+                                            />
+                                            <h4>{project.name}</h4>
+                                            <small style={{ color: "#888" }}>
+                                                {new Date(project.createdAt).toLocaleDateString("en-US", {
+                                                    year: "numeric",
+                                                    month: "short",
+                                                })}
+                                            </small>
+                                            <p>{project.description}</p>
+                                            {/* Show all icons */}
+                                            {
+                                                project.programmingLanguages?.length > 0 && (
+                                                    <TechStackContainer>
+                                                        <h6>Programming Languages</h6>
+                                                        <TechIcons>
+                                                            {project.programmingLanguages?.map((id) => {
+                                                                const lang = programmingLanguages.find((l) => l.id === id);
+                                                                return (
+                                                                    <div key={id} className="d-flex align-items-center me-2 border border-1 rounded-3 px-2 py-1">
+                                                                        <TechIcon src={lang.icon} alt={lang.name} />
+                                                                        <small className="ms-1">{lang.name}</small>
+                                                                    </div>
+                                                                );
+                                                            })}
+                                                        </TechIcons>
+                                                    </TechStackContainer>
+                                                )
+                                            }
+                                            <TechStackContainer>
+                                                <h6>Technologies</h6>
+                                                <TechIcons>
+                                                    {project.technologies?.map((id) => {
+                                                        const tech = technologies.find((t) => t.id === id);
+                                                        return (
+                                                            <div key={id} className="d-flex align-items-center me-2  border border-1 rounded-3 px-2 py-1">
+                                                                <TechIcon src={tech.icon} alt={tech.name} />
+                                                                <small className="ms-1">{tech.name}</small>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </TechIcons>
+                                            </TechStackContainer>
+                                            {
+                                                project.deploymentPlatforms?.length > 0 && (
+                                                    <TechStackContainer>
+                                                        <h6>Deployment Platforms</h6>
+                                                        <TechIcons>
+                                                            {project.deploymentPlatforms?.map((id) => {
+                                                                const dp = deploymentPlatforms.find((d) => d.id === id);
+                                                                return (
+                                                                    <div key={id} className="d-flex align-items-center me-2 border border-1 rounded-3 px-2 py-1">
+                                                                        <TechIcon src={dp?.icon?.src || dp.icon} alt={dp.name} />
+                                                                        <small className="ms-1">{dp.name}</small>
+                                                                    </div>
+                                                                );
+                                                            })}
+
+                                                        </TechIcons>
+                                                    </TechStackContainer>
+                                                )
+                                            }
+                                            {/* <TechStackContainer>
+                                                <h6>Project Type</h6>
+                                                <TechIcons>
+                                                    {project.projectType?.map((id) => {
+                                                        const pt = projectTypes.find((p) => p.id === id);
+                                                        return (
+                                                            <div key={id} className="d-flex align-items-center me-2">
+                                                                {pt.icon && <TechIcon src={pt.icon} alt={pt.name} />}
+                                                                <small className="ms-1">{pt.name}</small>
+                                                            </div>
+                                                        );
+                                                    })}
+                                                </TechIcons>
+                                            </TechStackContainer> */}
+                                        </ProjectData>
+
+                                        <ButtonsContainer>
+                                            <Link
+                                                className="btn btn-dark"
+                                                to={project.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
                                             >
-                                                <ImageLightbox
-                                                    imageSrc={app.imageUrl}
-                                                    imageAlt={app.name}
-                                                />
-                                                <WrapperHeader2>
-                                                    {app.name}
-                                                </WrapperHeader2>
-                                                <p
-                                                    style={{
-                                                        width: "100%",
-                                                        margin: 0,
-                                                    }}
+                                                <LaunchIcon fontSize="small" /> Production
+                                            </Link>
+                                            {project.github && (
+                                                <Link
+                                                    className="btn btn-secondary"
+                                                    to={project.github}
+                                                    target="_blank"
+                                                    rel="noopener noreferrer"
                                                 >
-                                                    {app.description}
-                                                </p>
-                                                <div className="d-flex align-items-center gap-3">
-                                                    <Link
-                                                        className="text-decoration-none text-white bg-dark px-3 py-1 rounded-2"
-                                                        to={app.link}
-                                                        target="_blank"
-                                                    >
-                                                        <LaunchIcon />{" "}
-                                                        {app.github
-                                                            ? "Live Demo"
-                                                            : "Production Link"}
-                                                    </Link>
-                                                    {app.github && (
-                                                        <Link
-                                                            className="text-decoration-none text-white bg-dark px-3 py-1 rounded-2"
-                                                            to={app.github}
-                                                            target="_blank"
-                                                        >
-                                                            <GitHubIcon />{" "}
-                                                            Github
-                                                        </Link>
-                                                    )}
-                                                </div>
-                                            </ProjectWrapper>
-                                        </SwiperSlide>
-                                    ))}
-                                </Swiper>
-                            </TechWrapper>
-                            <hr />
-                        </>
-                    ))}
-                </Wrapper>
-            </Contain>
-        </section>
+                                                    <GitHubIcon fontSize="small" /> GitHub
+                                                </Link>
+                                            )}
+                                        </ButtonsContainer>
+                                    </ProjectCard>
+                                </Col>
+                            ))}
+                        </Row>
+                    </Col>
+                </Row>
+            </Container>
+        </PageWrapper>
     );
 };
 
-export default Portfolio;
+export default ProjectsPage;

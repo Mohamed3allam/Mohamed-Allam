@@ -70,7 +70,7 @@ const Home = ({ mainColor, lightColor }) => {
                 <ButtonComponent
                     mainColor={mainColor}
                     lightColor={lightColor}
-                    to="/portfolio"
+                    to="/projects"
                     text="Portfolio"
                 />
             </ButtonDiv>

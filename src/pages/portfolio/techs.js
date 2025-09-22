@@ -18,7 +18,6 @@ export const programmingLanguages = [
         icon: images["icons/typescript.svg"],
     }
 ];
-
 export const technologies = [
     {
         id: 1,
@@ -76,7 +75,6 @@ export const technologies = [
         icon: images["icons/wordpress.svg"],
     }
 ]
-
 export const deploymentPlatforms = [
     {
         id: 1,
@@ -88,10 +86,11 @@ export const deploymentPlatforms = [
         name: "AWS EC2",
         icon: images["icons/aws.svg"],
     },
-    {
-        id: 3, name: "Netlify",
-        icon: images["icons/netlify.svg"],
-    },
+    // {
+    //     id: 3, 
+    //     name: "Netlify",
+    //     icon: images["icons/netlify.svg"],
+    // },
     {
         id: 4,
         name: "Github Pages",
@@ -101,9 +100,15 @@ export const deploymentPlatforms = [
         id: 5,
         name: "Firebase Hosting",
         icon: images["icons/firebase.svg"],
-    }, {
+    },
+    {
         id: 6,
         name: "Render",
         icon: images["icons/render.svg"],
+    },
+    {
+        id: 7,
+        name: "Hostinger",
+        icon: images["icons/hostinger.svg"],
     }
 ]

@@ -165,7 +165,7 @@ const WavyDots = ({ color1, color2 }) => {
         switch (pathname) {
             case '/about':
                 return [30, 10,-30];
-            case '/portfolio':
+            case '/projects':
                 return [20, 15,-40];
             case '/contact':
                 return [10, 20,-50];

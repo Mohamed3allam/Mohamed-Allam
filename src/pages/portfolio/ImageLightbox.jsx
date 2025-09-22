@@ -5,7 +5,7 @@ import "yet-another-react-lightbox/styles.css";
 
 const Image = styled.img`
     border-radius: 5px;
-    filter: drop-shadow(0px 0px 3px white);
+    /* filter: drop-shadow(0px 0px 3px white); */
     width: 100%;
 `;
 export default function ImageLightbox({ imageSrc, imageAlt }) {

@@ -16,8 +16,9 @@ import SwipeableWrapper from "./components/SwipableWrapper/SwipableWrapper";
 import { palettes } from "./utils/Palette/Palette";
 import NotFound from "./pages/404/NotFound";
 import Settings2 from "./components/Settings/Settings2";
+import { AnimatePresence } from "framer-motion";
+import SingleProject from "./pages/single-project";
 
-// Initialize mainColor from localStorage or default to Blue
 const getInitialPalette = () => {
     const storedPalette = localStorage.getItem("userPalette");
     if (storedPalette) {
@@ -91,7 +92,7 @@ function App() {
                         cursorShown={cursorShown}
                         setCursorShown={setCursorShown}
                     />
-                    {/* <SwipeableWrapper> */}
+                    <AnimatePresence mode="wait">
                         <Routes>
                             <Route
                                 index
@@ -112,7 +113,7 @@ function App() {
                                 }
                             />
                             <Route
-                                path="/portfolio"
+                                path="/projects"
                                 element={
                                     <Portfolio
                                         mainColor={mainColor}
@@ -120,6 +121,13 @@ function App() {
                                     />
                                 }
                             />
+                            {/* <Route
+                                path="/projects/:id"
+                                element={
+                                    <SingleProject
+                                    />
+                                }
+                            /> */}
                             <Route
                                 path="/contact"
                                 element={
@@ -139,7 +147,7 @@ function App() {
                                 }
                             />
                         </Routes>
-                    {/* </SwipeableWrapper> */}
+                    </AnimatePresence>
                 </Navbar>
             </WowWrapper>
         </PageLoader>

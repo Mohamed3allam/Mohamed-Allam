@@ -4,18 +4,7 @@ import images from '../../imgs'
 import { FacebookOutlined, GitHub, LinkedIn, X } from '@mui/icons-material'
 import { Link } from 'react-router-dom'
 import DownloadCV from './DownloadCV'
-import { tech } from './techs'
-import SkillGlobe from './Skills'
-import AboutCard from './AboutCard'
 
-const allSkills = [
-  ...tech.frontend,
-  ...tech.backend,
-  ...tech.databases,
-  ...tech.state_patterns,
-  ...tech.cloud_tools,
-  ...tech.cms
-];
 
 const rotate = keyframes`
   from {
@@ -35,7 +24,8 @@ const rotateReverse = keyframes`
   }
 `;
 const Wrapper = styled.div`
-
+  height: 100% !important;
+  min-height: fit-content !important;
 `
 
 const AboutDiv = styled.div``
@@ -123,12 +113,11 @@ const StyledLink = styled(Link)`
 
 const About = ({ mainColor, lightColor }) => {
 
-  const flattenSkills = allSkills.flatMap((skill) => [
-    skill,
-    ...(skill.frameworks || []),
-  ]);
+
   return (
-    <Container className='d-flex flex-column justify-content-center align-items-center wow animate__animated animate__fadeIn gap-5 pt-4'>
+    <Container style={{
+      minHeight: '500px',
+    }} className='d-flex flex-column justify-content-center align-items-center wow animate__animated animate__fadeIn gap-5 pt-4'>
       <Wrapper className='d-flex justify-content-center align-items-center flex-wrap gap-5'>
         <div style={{ position: 'relative', height: '400px', width: '400px', margin: '0 auto' }}>
           <BigCircle>
@@ -170,10 +159,6 @@ const About = ({ mainColor, lightColor }) => {
         </AboutDiv>
         {/* <AboutCard /> */}
       </Wrapper>
-      <hr style={{ width: '100%' }} />
-      <ProgressWrapper className='d-flex flex-column gap-4 flex-wrap px-5 justify-content-around w-100'>
-        <SkillGlobe skills={flattenSkills} />
-      </ProgressWrapper>
     </Container>
   )
 }
