@@ -69,6 +69,7 @@ function NavScrollExample({ children, mainColor, lightColor }) {
             <main
                 style={{
                     paddingTop: "100px",
+                    paddingBottom: "50px",
                     width: "100%",
                     overflow: "hidden",
                 }}

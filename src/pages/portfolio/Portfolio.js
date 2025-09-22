@@ -22,10 +22,8 @@ import {
     TechStackContainer,
     TechIcons,
 } from "./styles/ProjectsPage.styles";
-import { motion } from "framer-motion";
 
 const ProjectsPage = () => {
-    // Parse filters from URL initially
     const getFiltersFromUrl = () => {
         const params = new URLSearchParams(window.location.search);
         return {
@@ -40,7 +38,6 @@ const ProjectsPage = () => {
     const [filteredProjects, setFilteredProjects] = useState(projects.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt)));
     const [showFilters, setShowFilters] = useState(false);
 
-    // Sync URL with state whenever filters change
     useEffect(() => {
         const params = new URLSearchParams();
         Object.entries(filters).forEach(([key, values]) => {
@@ -49,7 +46,6 @@ const ProjectsPage = () => {
         window.history.replaceState({}, "", `?${params.toString()}`);
     }, [filters]);
 
-    // Filtering logic
     useEffect(() => {
         let result = projects;
 
@@ -199,7 +195,9 @@ const ProjectsPage = () => {
                             backgroundColor: "rgba(0, 0, 0, 0.0)",
                         }}
                     >
-                        <Offcanvas.Header closeButton>
+                        <Offcanvas.Header style={{
+                            backgroundColor: "rgba(255, 255, 255, 0.3)"
+                        }} closeButton>
                             <Offcanvas.Title>Filters</Offcanvas.Title>
                         </Offcanvas.Header>
                         <Offcanvas.Body>{SidebarFilters}</Offcanvas.Body>

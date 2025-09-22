@@ -198,7 +198,21 @@ export const projects = [
         programmingLanguages: [],
         deploymentPlatforms: [7],
         link: "https://rowadelhayah.com/",
+        github: "https://github.com/Mohamed3allam/menu-app-ts",
         imageUrl: images["project-images/rowad.png"],
         createdAt: "2023-12-01T00:00:00.000Z"
+    },
+    {
+        id: 15,
+        name: "Menus App",
+        slug: "menus-app",
+        projectType: [1, 2, 3],
+        technologies: [1, 4, 7, 8, 9],
+        programmingLanguages: [1, 2],
+        deploymentPlatforms: [2, 1],
+        link: "https://menu-app-frontend-alpha.vercel.app/",
+        description: "Restaurant menu management app where admins can create, update, and organize categories & items.",
+        imageUrl: images["project-images/menu.png"],
+        createdAt: "2024-05-01T00:00:00.000Z"
     },
 ];

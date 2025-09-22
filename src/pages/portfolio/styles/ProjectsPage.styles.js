@@ -26,7 +26,8 @@ export const ProjectCard = styled.div`
   justify-content: space-between;
   gap: 15px;
   padding: 28px;
-  backdrop-filter: blur(5px);
+  backdrop-filter: blur(5px) !important;
+  background-color: rgba(0, 0, 0, 0.7);
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   height: 100%;
   * {

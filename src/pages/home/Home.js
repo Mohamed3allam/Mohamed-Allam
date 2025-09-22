@@ -51,7 +51,7 @@ const Home = ({ mainColor, lightColor }) => {
             </NameDiv>
             <TitleDiv>
                 <Title className="wow animate__animated animate__fadeInDown animate__delay-1s">
-                    Web{' '}
+                    Full Stack{' '}
                     <span
                         className="wow animate__animated animate__fadeInRight animate__delay-2s"
                         style={{ color: lightColor }}
