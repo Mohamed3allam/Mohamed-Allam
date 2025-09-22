@@ -36,10 +36,13 @@ export const ProjectCard = styled.div`
   `;
 
 export const ProjectData = styled.div`
-display: flex;
-flex-direction: column;
-gap: 5px;
-
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  img {
+    max-height: 190px;
+    object-fit: cover;
+  }
 `
 
 export const TechIcons = styled.div`
