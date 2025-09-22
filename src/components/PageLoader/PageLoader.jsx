@@ -23,7 +23,7 @@ const Message = styled.h1`
   color: #fff;
   font-size: clamp(1.5rem, 0.3333rem + 3.3333vw, 3rem);
   text-align: center;
-  animation: ${fadeInStayOut} 3s forwards; /* 3 seconds for slower fade */
+  animation: ${fadeInStayOut} 3s forwards;
 `;
 
 const PageLoader = ({ children }) => {
@@ -32,28 +32,23 @@ const PageLoader = ({ children }) => {
   useEffect(() => {
     const timers = [];
 
-    // Step 0: HelloMessage
-    timers.push(setTimeout(() => setStep(1), 3000)); // 3s animation
-
-    // Step 1: WelcomeMessage
-    timers.push(setTimeout(() => setStep(2), 6000)); // 3s after previous
+    timers.push(setTimeout(() => setStep(1), 3000));
 
     return () => timers.forEach(clearTimeout);
   }, []);
 
   return (
     <>
-      {step < 2 && (
+      {step < 1 && (
         <Container>
-          {step === 0 && <Message>Hello, there</Message>}
-          {step === 1 && <Message>Welcome to My Portfolio</Message>}
+          {step === 0 && <Message>Welcome to My Portfolio</Message>}
         </Container>
       )}
       <div
         style={{
-          opacity: step === 2 ? 1 : 0,
+          opacity: step === 1 ? 1 : 0,
           transition: "opacity 1s ease",
-          pointerEvents: step === 2 ? "auto" : "none",
+          pointerEvents: step === 1 ? "auto" : "none",
         }}
       >
         {children}
