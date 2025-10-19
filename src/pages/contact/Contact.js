@@ -72,8 +72,8 @@ const Contact = ({ mainColor }) => {
     const contacts = [
         {
             icon: <WhatsApp />,
-            label: "+201555018862",
-            link: "https://wa.me/201555018862",
+            label: "+201555018863",
+            link: "https://wa.me/201555018863",
             color: "#25D366",
         },
         {
@@ -108,8 +108,8 @@ const Contact = ({ mainColor }) => {
         },
         {
             icon: <PhoneAndroidOutlined />,
-            label: "+201555018862",
-            link: "tel:+201555018862",
+            label: "+201555018863",
+            link: "tel:+201555018863",
             color: "#34B7F1",
         },
     ];
